@@ -1,11 +1,9 @@
 from django.views.generic import TemplateView
-from rest_framework import mixins
-from rest_framework.decorators import action
-from rest_framework.response import Response
-from rest_framework.viewsets import GenericViewSet, ModelViewSet
+from rest_framework.generics import CreateAPIView, RetrieveUpdateAPIView, RetrieveDestroyAPIView, ListAPIView
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
 
-from .models import Users, Category
-from .serializers import UsersSerializer, CategorySerializer
+from .models import News, Category
+from .serializers import NewsSerializer, CategorySerializer
 
 
 
@@ -13,23 +11,56 @@ from .serializers import UsersSerializer, CategorySerializer
 class IndexView(TemplateView):
     template_name = 'index.html'
 
+# __________________________________________________________________________________________
 
-class UsersViewSet(mixins.CreateModelMixin,
-                   mixins.RetrieveModelMixin,
-                   mixins.UpdateModelMixin,
-                   mixins.ListModelMixin,
-                   GenericViewSet):
-
-    queryset = Users.objects.all()
-    serializer_class = UsersSerializer
-
-    # def get_queryset(self):
+class NewsAPIList(ListAPIView):
+    queryset = News.objects.all()
+    serializer_class = NewsSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly,)
 
 
+class NewsAPIUpdate(RetrieveUpdateAPIView):
+    queryset = News.objects.all()
+    serializer_class = NewsSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly,)
 
-class CategoryViewSet(ModelViewSet):
+
+class NewsAPIDestroy(RetrieveDestroyAPIView):
+    queryset = News.objects.all()
+    serializer_class = NewsSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+
+
+class NewsAPICreate(CreateAPIView):
+    queryset = News.objects.all()
+    serializer_class = NewsSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+
+# __________________________________________________________________________________________
+
+class CategoryAPIList(ListAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    permission_classes = (IsAuthenticatedOrReadOnly,)
 
+
+class CategoryAPIUpdate(RetrieveUpdateAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+
+
+class CategoryAPIDestroy(RetrieveDestroyAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+
+
+class CategoryAPICreate(CreateAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+
+# __________________________________________________________________________________________
 
 

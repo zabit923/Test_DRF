@@ -1,13 +1,14 @@
 from rest_framework import serializers
 from rest_framework.renderers import JSONRenderer
 
-from .models import Users, Category
+from .models import News, Category
 
 
-class UsersSerializer(serializers.ModelSerializer):
+class NewsSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
     class Meta:
-        model = Users
-        fields = ('id', 'title', 'content', 'is_published', 'cat')
+        model = News
+        fields = ('id', 'title', 'content', 'user', 'image', 'cat')
 
 
 class CategorySerializer(serializers.ModelSerializer):

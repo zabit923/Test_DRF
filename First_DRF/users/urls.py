@@ -1,16 +1,18 @@
-from django.urls import path, include
-from .views import IndexView, UsersViewSet, CategoryViewSet
-from rest_framework import routers
+from django.urls import path
+from .views import IndexView, NewsAPIList, NewsAPIUpdate, NewsAPIDestroy, NewsAPICreate, CategoryAPIList, \
+                   CategoryAPICreate, CategoryAPIUpdate, CategoryAPIDestroy
 
 
-
-
-router = routers.DefaultRouter()
-router.register(r'users', UsersViewSet)
-router.register(r'category', CategoryViewSet)
 
 urlpatterns = [
     path('', IndexView.as_view(), name='index'),
-    path('api/v1/', include(router.urls), name='users'),
-    path('api/v1/', include(router.urls), name='category'),
+    path('api/v1/news/', NewsAPIList.as_view()),
+    path('api/v1/news_create/', NewsAPICreate.as_view()),
+    path('api/v1/news/<int:pk>', NewsAPIUpdate.as_view()),
+    path('api/v1/news_delete/<int:pk>', NewsAPIDestroy.as_view()),
+
+    path('api/v1/category/', CategoryAPIList.as_view()),
+    path('api/v1/category_create/', CategoryAPICreate.as_view()),
+    path('api/v1/category/<int:pk>', CategoryAPIUpdate.as_view()),
+    path('api/v1/category_delete/<int:pk>', CategoryAPIDestroy.as_view()),
 ]
