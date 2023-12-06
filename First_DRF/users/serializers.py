@@ -6,10 +6,10 @@ from .models import News, Category
 
 class NewsSerializer(serializers.ModelSerializer):
     user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
     class Meta:
         model = News
-        fields = ('id', 'title', 'content', 'user', 'image', 'cat')
-
+        fields = '__all__'
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
