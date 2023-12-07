@@ -1,8 +1,8 @@
 from django.views.generic import TemplateView
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView, RetrieveDestroyAPIView, ListAPIView
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 
-from .models import News, Category, User
+from .models import News, Category
 from .serializers import NewsSerializer, CategorySerializer
 from .permissions import IsAdminOrReadOnly, IsOwnerOrReadOnly
 
@@ -23,7 +23,7 @@ class NewsAPIList(ListCreateAPIView):
 class NewsAPIUpdate(RetrieveUpdateAPIView):
     queryset = News.objects.all()
     serializer_class = NewsSerializer
-    permission_classes = (IsOwnerOrReadOnly,)
+    permission_classes = (IsAuthenticated,)
 
 
 class NewsAPIDestroy(RetrieveDestroyAPIView):
