@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from .views import IndexView, NewsAPIList, NewsAPIUpdate, NewsAPIDestroy, CategoryAPIList, \
                    CategoryAPIUpdate, CategoryAPIDestroy
 
@@ -13,4 +13,6 @@ urlpatterns = [
     path('api/v1/category/', CategoryAPIList.as_view()),
     path('api/v1/category/<int:pk>', CategoryAPIUpdate.as_view()),
     path('api/v1/category_delete/<int:pk>', CategoryAPIDestroy.as_view()),
+
+    path('api/v1/drf-auth/', include('rest_framework.urls')),
 ]
