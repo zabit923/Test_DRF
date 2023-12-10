@@ -1,7 +1,7 @@
 from rest_framework import serializers
-from rest_framework.renderers import JSONRenderer
+from djoser.serializers import UserCreateSerializer, UserSerializer
 
-from .models import News, Category
+from .models import News, Category, User
 
 
 class NewsSerializer(serializers.ModelSerializer):
@@ -15,3 +15,19 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = '__all__'
+
+
+class UserCreateSerializer(UserCreateSerializer):
+    class Meta(UserCreateSerializer.Meta):
+        model=User
+        fields=('username', 'password', 'first_name', 'last_name')
+
+
+class UserSerializer(UserSerializer):
+    class Meta:
+        model=User
+        fields= (
+            'id', 'username', 'first_name', 'last_name',
+            'is_superuser', 'email', 'is_staff', 'date_joined',
+            'image'
+        )

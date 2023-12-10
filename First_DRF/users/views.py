@@ -2,7 +2,7 @@ from django.views.generic import TemplateView
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView, RetrieveDestroyAPIView, ListAPIView
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 
-from .models import News, Category
+from .models import News, Category, User
 from .serializers import NewsSerializer, CategorySerializer
 from .permissions import IsAdminOrReadOnly, IsOwnerOrReadOnly
 
