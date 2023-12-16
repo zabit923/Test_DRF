@@ -19,9 +19,8 @@ from dotenv import load_dotenv
 
 
 load_dotenv()
-SECRET_KEY = os.getenv('SECRET_KEY')
 BASE_DIR = Path(__file__).resolve().parent.parent
-SECRET_KEY = SECRET_KEY
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 
 
@@ -124,11 +123,11 @@ REST_FRAMEWORK = {
 
 DJOSER = {
     'LOGIN_FIELD': 'username',
-    'USER_CREATE_PASSWORD_RETYPE': True,
     'SERIALIZERS': {
         'user_create': 'users.serializers.UserCreateSerializer',
         'user': 'users.serializers.UserSerializer'
     },
+
 }
 
 

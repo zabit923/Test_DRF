@@ -17,7 +17,7 @@ class IndexView(TemplateView):
 class NewsAPIList(ListCreateAPIView):
     queryset = News.objects.all()
     serializer_class = NewsSerializer
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+    permission_classes = (IsAuthenticated,)
 
 
 class NewsAPIUpdate(RetrieveUpdateAPIView):
